@@ -1,0 +1,16 @@
+---
+const projects = [
+  { title: "Project One", desc: "A cool web app." },
+  { title: "Project Two", desc: "Another cool app." }
+];
+---
+<section class="projects">
+  <h2>My Work</h2>
+  
+  {projects.map(p => (
+    <div class="card">
+      <h3>{p.title}</h3>
+      <p>{p.desc}</p>
+    </div>
+  ))}
+</section>
