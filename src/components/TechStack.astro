@@ -1,0 +1,14 @@
+---
+const frontend = [
+  'HTML', 'CSS', 'JavaScript'
+];
+---
+<section class="projects">
+  <h2>My Work</h2>
+  
+  {frontend.map(tech => (
+    <div class="card">
+      <h3>{tech}</h3>
+    </div>
+  ))}
+</section>
