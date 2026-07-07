@@ -1,5 +1,5 @@
 ---
-const logoText = "Portfolio";
+const logoText = "Jhun Kenneth Iniego";
 
 const navLinks = [
   { name: "Home", url: "#hero" },
@@ -10,14 +10,199 @@ const navLinks = [
 ];
 ---
 
-<nav class="navbar">
+<nav class="navbar" id="navbar">
   <div class="nav-container">
     <a href="#hero" class="logo">{logoText}</a>
-    
-    <ul class="nav-links">
+
+    <div class="nav-links" id="navLinks">
       {navLinks.map(link => (
-        <li><a href={link.url}>{link.name}</a></li>
+        <a href={link.url}>{link.name}</a>
       ))}
-    </ul>
+    </div>
+
+    <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
   </div>
 </nav>
+
+<style>
+  .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: #ffffff;
+    border-bottom: 1px solid #eaeaea;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0);
+    transition: box-shadow 0.25s ease;
+  }
+
+  .navbar.scrolled {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  }
+
+  .nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 18px 40px;
+  }
+
+  .logo {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+  }
+
+  .nav-links a {
+    position: relative;
+    color: #444;
+    text-decoration: none;
+    font-size: 0.95rem;
+    padding: 4px 0;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover {
+    color: #1a1a1a;
+  }
+
+  .nav-links a::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background: #1a1a1a;
+    bottom: -2px;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  .nav-links a:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .menu-btn {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+  }
+
+  .menu-btn span {
+    width: 22px;
+    height: 2px;
+    background: #1a1a1a;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .menu-btn.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .menu-btn.open span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .menu-btn.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  @media (max-width: 875px) {
+    .nav-container {
+      padding: 16px 24px;
+    }
+
+    .menu-btn {
+      display: flex;
+    }
+
+    .nav-links {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+      background: #ffffff;
+      border-bottom: 1px solid #eaeaea;
+      padding: 12px 24px 20px;
+      max-height: 0;
+      overflow: hidden;
+      opacity: 0;
+      transition: max-height 0.25s ease, opacity 0.2s ease;
+    }
+
+    .nav-links.open {
+      max-height: 300px;
+      opacity: 1;
+    }
+
+    :global(body.resizing) .nav-links {
+      transition: none;
+    }
+
+    .nav-links a {
+      width: 100%;
+      padding: 10px 0;
+    }
+
+    .nav-links a::after {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const navbar = document.getElementById("navbar");
+  const menuBtn = document.getElementById("menuBtn");
+  const navLinks = document.getElementById("navLinks");
+
+  menuBtn?.addEventListener("click", () => {
+    menuBtn.classList.toggle("open");
+    navLinks?.classList.toggle("open");
+  });
+
+  navLinks?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      menuBtn?.classList.remove("open");
+      navLinks.classList.remove("open");
+    });
+  });
+
+  window.addEventListener("scroll", () => {
+    if (window.scrollY > 10) {
+      navbar?.classList.add("scrolled");
+    } else {
+      navbar?.classList.remove("scrolled");
+    }
+  });
+  
+  let resizeTimer: ReturnType<typeof setTimeout>;
+  window.addEventListener("resize", () => {
+    document.body.classList.add("resizing");
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      document.body.classList.remove("resizing");
+    }, 200);
+  });
+</script>
