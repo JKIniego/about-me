@@ -1,0 +1,23 @@
+---
+const logoText = "Portfolio";
+
+const navLinks = [
+  { name: "Home", url: "#hero" },
+  { name: "About Me", url: "#about-me" },
+  { name: "Education", url: "#education" },
+  { name: "Tech Stack", url: "#tech-stack" },
+  { name: "Projects", url: "#projects" },
+];
+---
+
+<nav class="navbar">
+  <div class="nav-container">
+    <a href="#hero" class="logo">{logoText}</a>
+    
+    <ul class="nav-links">
+      {navLinks.map(link => (
+        <li><a href={link.url}>{link.name}</a></li>
+      ))}
+    </ul>
+  </div>
+</nav>
