@@ -91,8 +91,20 @@ const socials = [
   }
 
   h1 span {
-    color: #1a1a1a;
+    background: linear-gradient(to right, #5fc4ff, #43ff78, #5fc4ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: inline;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    transition: filter 0.3s ease;
   }
+
+  h1 span:hover {
+    filter: drop-shadow(0px 4px 12px rgba(95, 196, 255, 0.75));
+}
 
   .tagline {
     font-size: 1.1rem;
