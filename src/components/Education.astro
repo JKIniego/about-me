@@ -1,7 +1,149 @@
 ---
-const description = "This is an education history."
+const heading = "Education";
+
+const entries = [
+  {
+    degree: "BS in Computer Science",
+    institution: "University of the Philippines Tacloban",
+    period: "2023 — Present"
+  },
+  {
+    degree: "High School",
+    institution: "Philippine Science High School - Eastern Visayas Campus",
+    period: "2017 — 2023"
+  },
+  {
+    degree: "Elementary",
+    institution: "Rizal Central School",
+    period: "2011 — 2017"
+  }
+];
 ---
 
 <section id="education" class="education">
-  <p>{ description }</p>
+  <div class="title">
+    <h2>{heading}</h2>
+  </div>
+
+  <div class="timeline">
+    {entries.map(entry => (
+      <div class="entry">
+        <div class="entry-marker">
+          <span class="dot"></span>
+        </div>
+        <div class="entry-content">
+          <span class="entry-period">{entry.period}</span>
+          <h3>{entry.degree}</h3>
+          <p class="institution">{entry.institution}</p>
+        </div>
+      </div>
+    ))}
+  </div>
 </section>
+
+<style>
+  .education {
+    padding: 70px 60px;
+    background: #fff;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 48px;
+    text-transform: uppercase;
+    border-bottom: 3px solid #1a1a1a;
+  }
+
+  .timeline {
+    position: relative;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .timeline::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    bottom: 6px;
+    left: 9px;
+    width: 2px;
+    background: #e5e5e5;
+  }
+
+  .entry {
+    position: relative;
+    display: flex;
+    gap: 28px;
+    padding-bottom: 44px;
+  }
+
+  .entry:last-child {
+    padding-bottom: 0;
+  }
+
+  .entry-marker {
+    position: relative;
+    flex: 0 0 20px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .dot {
+    position: absolute;
+    top: 6px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: #1a1a1a;
+    box-shadow: 0 0 0 4px #fff;
+    z-index: 1;
+  }
+
+  .entry-content {
+    flex: 1;
+    min-width: 0;
+    padding-top: 2px;
+  }
+
+  .entry-period {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #999;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+
+  .entry-content h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 4px;
+  }
+
+  .institution {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #666;
+    margin: 0 0 10px;
+  }
+
+  @media (max-width: 720px) {
+    .education {
+      padding: 60px 24px;
+    }
+
+    .entry {
+      gap: 20px;
+      padding-bottom: 36px;
+    }
+  }
+</style>
