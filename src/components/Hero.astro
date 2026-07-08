@@ -1,9 +1,155 @@
 ---
-const name = "Jhun Kenneth R. Iniego";
+import { Image } from "astro:assets";
+import profilePhoto from "../assets/profile.jpg";
+
+const name = "Jhun Kenneth Iniego";
 const role = "Software Developer";
+const tagline = "I build clean, engaigng interfaces";
 ---
 
 <header id="hero" class="hero">
-  <h1>Hi, I'm { name }</h1>
-  <p>{ role }</p>
+  <div class="hero-content">
+    <p class="tag">
+      {role}
+    </p>
+
+    <h1>
+      Hi, I'm<br />
+      <span>{name}</span>
+    </h1>
+
+    <p class="tagline">{tagline}</p>
+
+    <a href="#projects" class="cta">
+      See my work
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle-fill" viewBox="0 0 16 16">
+        <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0M4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5z"/>
+      </svg>
+    </a>
+  </div>
+
+  <div class="hero-photo">
+    <Image src={profilePhoto} alt={name} width={420} height={420} />
+  </div>
 </header>
+
+<style>
+  .hero {
+    position: relative;
+    padding: 110px 60px 210px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+  }
+
+  .hero-content {
+    flex: 1 1 380px;
+    min-width: 0;
+    max-width: 500px;
+  }
+
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #999;
+    margin: 0 0 24px;
+  }
+
+  h1 {
+    font-size: 3.0rem;
+    font-weight: 600;
+    line-height: 1.15;
+    color: #1a1a1a;
+    margin: 0 0 22px;
+  }
+
+  h1 span {
+    color: #1a1a1a;
+  }
+
+  .tagline {
+    font-size: 1.1rem;
+    color: #676767;
+    line-height: 1.65;
+    max-width: 440px;
+    margin-bottom: 36px;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-decoration: none;
+    border-bottom: 1px solid #1a1a1a;
+    padding-bottom: 3px;
+  }
+
+  .cta:focus-visible {
+    outline: 2px solid #1a1a1a;
+    outline-offset: 4px;
+  }
+
+  .cta svg {
+    margin-left: 5px;
+    transition: transform 0.15s ease;
+  }
+
+  .cta:hover svg {
+    transform: translateX(3px);
+  }
+
+  .hero-photo {
+    flex: 0 0 auto;
+    width: clamp(160px, 22vw, 320px);
+    height: clamp(160px, 22vw, 320px);
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid #eaeaea;
+  }
+
+  .hero-photo :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 900px) {
+    .hero {
+      padding: 90px 40px 175px;
+      gap: 40px;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .hero {
+      flex-direction: column-reverse;
+      text-align: center;
+      padding: 70px 24px 140px;
+    }
+
+    .hero-content {
+      max-width: none;
+    }
+
+    .tagline {
+      max-width: none;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-photo {
+      width: clamp(140px, 40vw, 220px);
+      height: clamp(140px, 40vw, 220px);
+    }
+  }
+</style>
