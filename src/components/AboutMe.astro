@@ -1,7 +1,63 @@
 ---
-const description = "This is a description."
+const heading = "About me";
+
+const paragraphs = [
+  "I'm currently a 4th year student studying BS in Computer Science at the University of the Philippines Tacloban. Somewhere along the way I got curious about how the websites and apps I use every day actually work, and that curiosity turned into learning to code.",
+  "Right now I'm mainly working with websites, and I'm especially drawn to full-stack development. Most of what I know so far has come from developing course projects.",
+  "Outside of coding, I play games. I'm currently learning emerging technologies."
+];
 ---
 
 <section id="about-me" class="about-me">
-  <p>{ description }</p>
+  <div class="title">
+    <h2>{heading}</h2>
+  </div>
+
+  <div class="about-body">
+    {paragraphs.map((p) => <p>{p}</p>)}
+  </div>
 </section>
+
+<style>
+  .about-me {
+    padding: 90px 60px;
+    background: #fff;
+  }
+
+  .title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  h2 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 600;
+    color: #1a1a1a;
+    margin: 0 0 40px;
+    text-transform: uppercase;
+    border-bottom: 3px solid #1a1a1a;
+  }
+
+  .about-body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #555;
+    margin-bottom: 20px;
+    text-align: justify;
+  }
+
+  @media (max-width: 720px) {
+    .about-me {
+      padding: 60px 24px;
+    }
+
+    .about-body {
+      flex-direction: column;
+      gap: 32px;
+    }
+  }
+</style>
