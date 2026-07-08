@@ -1,5 +1,30 @@
 ---
+import { Image } from "astro:assets";
+import quasarIcon from "../assets/icons/Quasar.svg";
+
 const heading = "Tech Stack";
+
+const iconMap: Record<string, string> = {
+  "HTML": "html",
+  "CSS": "css",
+  "JavaScript": "js",
+  "React.js": "react",
+  "Vue.js": "vue",
+  "Quasar": "quasar",
+  "Astro": "astro",
+  "Java": "java",
+  "Python": "python",
+  "Django": "django",
+  "Php": "php",
+  "Laravel": "laravel",
+  "MySQL": "mysql",
+  "PostgreSQL": "postgres",
+  "Supabase": "supabase",
+  "Git": "git",
+  "GitHub": "github",
+  "Figma": "figma",
+  "VS Code": "vscode"
+};
 
 const categories = [
   {
@@ -28,7 +53,23 @@ const categories = [
         <span class="group-label">{category.label}</span>
         <div class="pills">
           {category.items.map((item) => (
-            <span class="pill">{item}</span>
+            <span class="pill">
+              {item === "Quasar" ? (
+                <Image src={quasarIcon} alt="Quasar" width={20} height={20} />
+              ) : iconMap[item] ? (
+                <img
+                  src={`https://skillicons.dev/icons?i=${iconMap[item]}`}
+                  alt={item}
+                  loading="lazy"
+                />
+              ) : (
+                <svg class="fallback-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 6 3 12l6 6" />
+                  <path d="M15 6l6 6-6 6" />
+                </svg>
+              )}
+              {item}
+            </span>
           ))}
         </div>
       </div>
@@ -88,12 +129,32 @@ const categories = [
   }
 
   .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-size: 0.9rem;
     font-weight: 500;
     color: #1a1a1a;
-    padding: 6px 16px;
-    border: 1px solid #e5e5e5;
+    padding: 6px 11px;
+    border: 1px solid #999;
     border-radius: 20px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .pill:hover {
+    border-color: #1a1a1a;
+    transform: translateY(-3px);
+  }
+
+  .pill img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .fallback-icon {
+    width: 20px;
+    height: 20px;
+    color: #999;
   }
 
   @media (max-width: 640px) {
