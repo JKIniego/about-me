@@ -2,11 +2,31 @@
 const logoText = "Jhun Kenneth Iniego";
 
 const navLinks = [
-  { name: "Home", url: "#hero" },
-  { name: "About Me", url: "#about-me" },
-  { name: "Education", url: "#education" },
-  { name: "Tech Stack", url: "#tech-stack" },
-  { name: "Projects", url: "#projects" },
+  {
+    name: "Home",
+    url: "#hero",
+    icon: '<path d="M3 10.5 12 3l9 7.5" /><path d="M5 9.5V21h14V9.5" />'
+  },
+  {
+    name: "About Me",
+    url: "#about-me",
+    icon: '<circle cx="12" cy="8" r="3.5" /><path d="M5 21c1.2-4 4-6 7-6s5.8 2 7 6" />'
+  },
+  {
+    name: "Education",
+    url: "#education",
+    icon: '<path d="M2 8.5 12 4l10 4.5-10 4.5-10-4.5Z" /><path d="M6 11v5c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-5" />'
+  },
+  {
+    name: "Tech Stack",
+    url: "#tech-stack",
+    icon: '<path d="M9 6 3 12l6 6" /><path d="M15 6l6 6-6 6" />'
+  },
+  {
+    name: "Projects",
+    url: "#projects",
+    icon: '<path d="M3 7.5h6l2 2.5h10v9.5H3v-12Z" />'
+  },
 ];
 ---
 
@@ -16,7 +36,11 @@ const navLinks = [
 
     <div class="nav-links" id="navLinks">
       {navLinks.map(link => (
-        <a href={link.url}>{link.name}</a>
+        <a href={link.url} class="nav-icon" aria-label={link.name}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" set:html={link.icon} />
+          <span class="tooltip">{link.name}</span>
+          <span class="label-text">{link.name}</span>
+        </a>
       ))}
     </div>
 
@@ -63,38 +87,53 @@ const navLinks = [
   .nav-links {
     display: flex;
     align-items: center;
-    gap: 36px;
+    gap: 30px;
   }
 
-  .nav-links a {
+  .nav-icon {
     position: relative;
-    color: #444;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
     text-decoration: none;
-    font-size: 0.95rem;
-    padding: 4px 0;
+    padding: 6px;
     transition: color 0.2s ease;
   }
 
-  .nav-links a:hover {
+  .nav-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .label-text {
+    display: none;
+  }
+
+  .nav-icon:hover {
     color: #1a1a1a;
   }
 
-  .nav-links a::after {
-    content: "";
+  .tooltip {
     position: absolute;
-    width: 100%;
-    height: 2px;
+    top: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-4px);
     background: #1a1a1a;
-    bottom: -2px;
-    left: 0;
-    transform: scaleX(0);
-    transform-origin: right;
-    transition: transform 0.3s ease;
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 500;
+    white-space: nowrap;
+    padding: 4px 9px;
+    border-radius: 5px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
   }
 
-  .nav-links a:hover::after {
-    transform: scaleX(1);
-    transform-origin: left;
+  .nav-icon:hover .tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
   }
 
   .menu-btn {
@@ -161,13 +200,23 @@ const navLinks = [
       transition: none;
     }
 
-    .nav-links a {
+    .nav-icon {
       width: 100%;
+      justify-content: flex-start;
       padding: 10px 0;
     }
 
-    .nav-links a::after {
+    .nav-icon svg {
       display: none;
+    }
+
+    .tooltip {
+      display: none;
+    }
+
+    .label-text {
+      display: block;
+      font-size: 0.95rem;
     }
   }
 </style>
@@ -196,7 +245,7 @@ const navLinks = [
       navbar?.classList.remove("scrolled");
     }
   });
-  
+
   let resizeTimer: ReturnType<typeof setTimeout>;
   window.addEventListener("resize", () => {
     document.body.classList.add("resizing");
