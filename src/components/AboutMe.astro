@@ -20,43 +20,54 @@ const paragraphs = [
 
 <style>
   .about-me {
-    padding: clamp(40px, 10vw, 135px) clamp(60px, 15vw, 220px);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(60px, 10vw, 120px) 24px;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 64px;
   }
 
   .title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    position: sticky;
+    top: 120px;
+    height: fit-content;
   }
 
   h2 {
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
-    font-weight: 600;
-    color: #1a1a1a;
-    margin: 0 0 40px;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
     text-transform: uppercase;
-    border-bottom: 3px solid #1a1a1a;
+    letter-spacing: 0.05em;
+    border-bottom: 3px solid #0f172a;
+    padding-bottom: 12px;
+    display: inline-block;
   }
 
   .about-body {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    font-size: 1.05rem;
-    line-height: 1.75;
-    color: #555;
-    margin-bottom: 20px;
-    text-align: justify;
+    gap: 20px;
   }
 
-  @media (max-width: 720px) {
+  .about-body p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: #475569;
+    margin: 0;
+  }
+
+  @media (max-width: 900px) {
     .about-me {
-      padding: 60px 24px;
+      grid-template-columns: 1fr;
+      gap: 32px;
     }
 
-    .about-body {
-      flex-direction: column;
-      gap: 32px;
+    .title {
+      position: relative;
+      top: 0;
     }
   }
 </style>

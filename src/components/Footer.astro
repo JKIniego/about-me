@@ -18,37 +18,38 @@ const socials = [
 
 <footer class="footer">
   <div class="footer-container">
+    <p class="footer-text">
+      &copy; {year} {name}. All rights reserved.
+      <span class="divider">/</span>
+      Powered by
+      <img
+        src="https://skillicons.dev/icons?i=astro"
+        loading="lazy"
+        alt="Astro"
+        class="astro-icon"
+      />
+      <span class="engine-name">Astro</span>
+    </p>
+
     <div class="socials">
       {socials.map(social => (
         <a href={social.url} class="social-link" aria-label={social.name} target="_blank" rel="noopener noreferrer">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" fill="currentColor" viewBox="0 0 16 16" set:html={social.icon} />
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" set:html={social.icon} />
         </a>
       ))}
     </div>
-
-    <p class="footer-text">
-      &copy; {year} {name}. All rights reserved.
-      <span class="divider">|</span>
-      Made with
-      <img
-        src={"https://skillicons.dev/icons?i=astro"}
-        loading="lazy"
-        class="astro-icon"
-      />
-      Astro
-    </p>
   </div>
 </footer>
 
 <style>
   .footer {
-    border-top: 1px solid #eaeaea;
-    padding: clamp(40px, 10vw, 135px) clamp(60px, 15vw, 220px);
-    padding: 40px 40px;
+    border-top: 1px solid #e2e8f0;
+    padding: 40px 24px;
+    background: #ffffff;
   }
 
   .footer-container {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 0 auto;
     display: flex;
     align-items: center;
@@ -59,7 +60,7 @@ const socials = [
   .socials {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 12px;
   }
 
   .social-link {
@@ -68,57 +69,54 @@ const socials = [
     justify-content: center;
     width: 38px;
     height: 38px;
-    border-radius: 50%;
-    border: 1px solid #eaeaea;
-    color: #666;
-    transition: color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+    border-radius: 10px;
+    border: 1px solid #e2e8f0;
+    color: #64748b;
+    transition: all 0.2s ease;
   }
 
   .social-link:hover {
-    color: #1a1a1a;
-    border-color: #1a1a1a;
+    color: #0f172a;
+    border-color: #cbd5e1;
+    background-color: #f8fafc;
     transform: translateY(-2px);
-  }
-
-  .social-link:focus-visible {
-    outline: 2px solid #1a1a1a;
-    outline-offset: 3px;
   }
 
   .footer-text {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 6px;
-    font-size: 0.82rem;
-    color: #555;
+    font-size: 0.85rem;
+    color: #64748b;
     margin: 0;
-    white-space: nowrap;
   }
 
   .divider {
-    color: #999;
+    color: #cbd5e1;
+    font-weight: 300;
+  }
+
+  .engine-name {
+    color: #0f172a;
+    font-weight: 600;
   }
 
   .astro-icon {
-    width: 16px;
-    height: 16px;
-    margin-left: 4px;
+    width: 14px;
+    height: 14px;
+    margin: 0 1px;
   }
 
   @media (max-width: 720px) {
-    .footer {
-      padding: 32px 24px;
-    }
-
     .footer-container {
-      flex-direction: column;
+      flex-direction: column-reverse;
       gap: 16px;
+      text-align: center;
     }
 
     .footer-text {
-      white-space: normal;
       justify-content: center;
-      text-align: center;
     }
   }
 </style>

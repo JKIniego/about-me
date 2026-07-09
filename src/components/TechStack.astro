@@ -29,11 +29,11 @@ const iconMap: Record<string, string> = {
 const categories = [
   {
     label: "Frontend",
-    items: ["HTML", "CSS", "JavaScript", "React.js", "Vue.js", "Quasar", "Astro", "Java"]
+    items: ["HTML", "CSS", "JavaScript", "React.js", "Vue.js", "Quasar", "Astro"]
   },
   {
-    label: "Backend",
-    items: ["Python", "Django", "Php", "Laravel", "MySQL", "PostgreSQL", "Supabase"]
+    label: "Backend & DB",
+    items: ["Python", "Django", "Php", "Laravel", "MySQL", "PostgreSQL", "Supabase", "Java"]
   },
   {
     label: "Tools",
@@ -55,7 +55,7 @@ const categories = [
           {category.items.map((item) => (
             <span class="pill">
               {item === "Quasar" ? (
-                <Image src={quasarIcon} alt="Quasar" width={20} height={20} />
+                <Image src={quasarIcon} alt="Quasar" width={18} height={18} />
               ) : iconMap[item] ? (
                 <img
                   src={`https://skillicons.dev/icons?i=${iconMap[item]}`}
@@ -63,9 +63,8 @@ const categories = [
                   loading="lazy"
                 />
               ) : (
-                <svg class="fallback-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M9 6 3 12l6 6" />
-                  <path d="M15 6l6 6-6 6" />
+                <svg class="fallback-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M9 6 3 12l6 6" /><path d="M15 6l6 6-6 6" />
                 </svg>
               )}
               {item}
@@ -79,52 +78,57 @@ const categories = [
 
 <style>
   .tech-stack {
-    padding: clamp(40px, 10vw, 135px) clamp(60px, 15vw, 220px);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(60px, 10vw, 120px) 24px;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 64px;
   }
 
   .title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    position: sticky;
+    top: 120px;
+    height: fit-content;
   }
 
   h2 {
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
-    font-weight: 600;
-    color: #1a1a1a;
-    margin: 0 0 48px;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
     text-transform: uppercase;
-    border-bottom: 3px solid #1a1a1a;
+    letter-spacing: 0.05em;
+    border-bottom: 3px solid #0f172a;
+    padding-bottom: 12px;
+    display: inline-block;
   }
 
   .stack-groups {
-    max-width: 720px;
-    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 40px;
   }
 
   .group {
-    display: flex;
+    display: grid;
+    grid-template-columns: 140px 1fr;
     gap: 24px;
-    align-items: baseline;
+    align-items: center;
   }
 
   .group-label {
-    flex: 0 0 100px;
     font-size: 0.8rem;
-    font-weight: 600;
+    font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: #777;
+    color: #64748b;
   }
 
   .pills {
-    flex: 1;
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 12px;
   }
 
   .pill {
@@ -132,42 +136,48 @@ const categories = [
     align-items: center;
     gap: 8px;
     font-size: 0.9rem;
-    font-weight: 500;
-    color: #1a1a1a;
-    padding: 6px 11px;
-    border: 1px solid #999;
-    border-radius: 20px;
-    transition: border-color 0.2s ease, transform 0.2s ease;
+    font-weight: 600;
+    color: #334155;
+    padding: 8px 14px;
+    border: 1px solid #e2e8f0;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+    transition: all 0.2s ease;
   }
 
   .pill:hover {
-    border-color: #1a1a1a;
-    transform: translateY(-3px);
+    border-color: #cbd5e1;
+    color: #468ee5;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px -3px rgba(0, 0, 0, 0.04);
   }
 
   .pill img {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
   }
 
   .fallback-icon {
-    width: 20px;
-    height: 20px;
-    color: #999;
+    width: 18px;
+    height: 18px;
+    color: #94a3b8;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 900px) {
     .tech-stack {
-      padding: 60px 24px;
+      grid-template-columns: 1fr;
+      gap: 32px;
+    }
+
+    .title {
+      position: relative;
+      top: 0;
     }
 
     .group {
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .group-label {
-      flex: none;
+      grid-template-columns: 1fr;
+      gap: 12px;
     }
   }
 </style>

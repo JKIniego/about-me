@@ -43,45 +43,52 @@ const entries = [
 
 <style>
   .education {
-    padding: clamp(40px, 10vw, 135px) clamp(60px, 15vw, 220px);
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: clamp(60px, 10vw, 120px) 24px;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 64px;
   }
 
   .title {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    position: sticky;
+    top: 120px;
+    height: fit-content;
   }
 
   h2 {
-    font-size: clamp(1.8rem, 3vw, 2.4rem);
-    font-weight: 600;
-    color: #1a1a1a;
-    margin: 0 0 48px;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    color: #0f172a;
+    margin: 0;
     text-transform: uppercase;
-    border-bottom: 3px solid #1a1a1a;
+    letter-spacing: 0.05em;
+    border-bottom: 3px solid #0f172a;
+    padding-bottom: 12px;
+    display: inline-block;
   }
 
   .timeline {
     position: relative;
-    max-width: 640px;
-    margin: 0 auto;
+    max-width: 680px;
   }
 
   .timeline::before {
     content: "";
     position: absolute;
-    top: 6px;
-    bottom: 6px;
+    top: 8px;
+    bottom: 8px;
     left: 9px;
     width: 2px;
-    background: #e5e5e5;
+    background: linear-gradient(to bottom, #468ee5, #e2e8f0 80%);
   }
 
   .entry {
     position: relative;
     display: flex;
     gap: 28px;
-    padding-bottom: 44px;
+    padding-bottom: 40px;
   }
 
   .entry:last-child {
@@ -101,48 +108,58 @@ const entries = [
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: #1a1a1a;
-    box-shadow: 0 0 0 4px #fff;
+    background: #cbd5e1;
+    box-shadow: 0 0 0 4px #ffffff;
     z-index: 1;
+    transition: all 0.3s ease;
   }
 
   .entry-content {
     flex: 1;
     min-width: 0;
-    padding-top: 2px;
   }
 
   .entry-period {
     display: block;
     font-size: 0.8rem;
-    font-weight: 600;
-    color: #777;
-    letter-spacing: 0.04em;
+    font-weight: 700;
+    color: #64748b;
+    letter-spacing: 0.05em;
     margin-bottom: 6px;
   }
 
   .entry-content h3 {
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: #1a1a1a;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #0f172a;
     margin: 0 0 4px;
   }
 
   .institution {
     font-size: 0.95rem;
     font-weight: 500;
-    color: #666;
-    margin: 0 0 10px;
+    color: #475569;
+    margin: 0;
+  }
+  
+  .entry:first-child .dot {
+    background: #10b981;
+    box-shadow: 0 0 0 5px #ffffff, 0 0 0 10px rgba(16, 185, 129, 0.15);
   }
 
-  @media (max-width: 720px) {
+  .entry:first-child .entry-period {
+    color: #10b981;
+  }
+
+  @media (max-width: 900px) {
     .education {
-      padding: 60px 24px;
+      grid-template-columns: 1fr;
+      gap: 32px;
     }
 
-    .entry {
-      gap: 20px;
-      padding-bottom: 36px;
+    .title {
+      position: relative;
+      top: 0;
     }
   }
 </style>
