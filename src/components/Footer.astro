@@ -43,9 +43,10 @@ const socials = [
 
 <style>
   .footer {
-    border-top: 1px solid #1e293b;
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(90deg, transparent 5%, #1e293b 35%, #1e293b 65%, transparent 95%) 1;
     padding: 40px 24px;
-    background: #0b0f19;
+    background-color: #080c16;
   }
 
   .footer-container {
@@ -73,14 +74,15 @@ const socials = [
     border: 1px solid #1e293b;
     color: #94a3b8;
     background-color: #0f172a;
-    transition: all 0.2s ease;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .social-link:hover {
     color: #f8fafc;
-    border-color: #334155;
+    border-color: #475569;
     background-color: #1e293b;
     transform: translateY(-2px);
+    filter: drop-shadow(0 4px 8px rgba(255, 255, 255, 0.05));
   }
 
   .footer-text {
