@@ -51,24 +51,28 @@ const categories = [
     {categories.map((category) => (
       <div class="group">
         <span class="group-label">{category.label}</span>
-        <div class="pills">
+        <div class="grid-container">
           {category.items.map((item) => (
-            <span class="pill">
-              {item === "Quasar" ? (
-                <Image src={quasarIcon} alt="Quasar" width={18} height={18} />
-              ) : iconMap[item] ? (
-                <img
-                  src={`https://skillicons.dev/icons?i=${iconMap[item]}`}
-                  alt={item}
-                  loading="lazy"
-                />
-              ) : (
-                <svg class="fallback-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M9 6 3 12l6 6" /><path d="M15 6l6 6-6 6" />
-                </svg>
-              )}
-              {item}
-            </span>
+            <div class="tech-card">
+              <div class="icon-wrapper">
+                {item === "Quasar" ? (
+                  <Image src={quasarIcon} alt="Quasar" width={20} height={20} />
+                ) : iconMap[item] ? (
+                  <img
+                    src={`https://skillicons.dev/icons?i=${iconMap[item]}`}
+                    alt={item}
+                    loading="lazy"
+                    width="20"
+                    height="20"
+                  />
+                ) : (
+                  <svg class="fallback-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M9 6 3 12l6 6" /><path d="M15 6l6 6-6 6" />
+                  </svg>
+                )}
+              </div>
+              <span class="tech-name">{item}</span>
+            </div>
           ))}
         </div>
       </div>
@@ -106,14 +110,14 @@ const categories = [
   .stack-groups {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 48px;
   }
 
   .group {
     display: grid;
     grid-template-columns: 140px 1fr;
     gap: 24px;
-    align-items: center;
+    align-items: flex-start;
   }
 
   .group-label {
@@ -122,44 +126,65 @@ const categories = [
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: white;
+    padding-top: 12px;
   }
-
-  .pills {
-    display: flex;
-    flex-wrap: wrap;
+  
+  .grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
     gap: 12px;
   }
-
-  .pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: #cbd5e1;
-    padding: 8px 14px;
-    border: 1px solid #1e293b;
+  
+  .tech-card {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 16px;
     background: #0f172a;
-    border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border: 1px solid #1e293b;
+    border-radius: 8px;
     transition: all 0.2s ease;
   }
 
-  .pill:hover {
+  .tech-card:hover {
     border-color: #468ee5;
-    color: #468ee5;
+    background: #131e36;
     transform: translateY(-2px);
-    box-shadow: 0 6px 12px -3px rgba(70, 142, 229, 0.15);
+    box-shadow: 0 6px 16px -4px rgba(70, 142, 229, 0.15);
+  }
+  
+  .icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: #080c16;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
   }
 
-  .pill img {
-    width: 18px;
-    height: 18px;
+  .icon-wrapper img, :global(.icon-wrapper img) {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+  }
+
+  .tech-name {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #cbd5e1;
+    letter-spacing: 0.01em;
+  }
+
+  .tech-card:hover .tech-name {
+    color: #f8fafc;
   }
 
   .fallback-icon {
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
     color: #64748b;
   }
 
@@ -177,13 +202,27 @@ const categories = [
 
     .group {
       grid-template-columns: 1fr;
-      gap: 12px;
+      gap: 16px;
+    }
+
+    .group-label {
+      padding-top: 0;
     }
   }
 
   @media (max-width: 720px) {
     .tech-stack {
       padding: clamp(28px, 6vw, 70px) 24px;
+    }
+
+    .grid-container {
+      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+      gap: 8px;
+    }
+
+    .tech-card {
+      padding: 12px;
+      gap: 8px;
     }
   }
 </style>
