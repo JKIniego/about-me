@@ -2,9 +2,31 @@
 const heading = "About me";
 
 const paragraphs = [
-  "I'm currently a 4th year student studying BS in Computer Science at the University of the Philippines Tacloban. Somewhere along the way I got curious about how the websites and apps I use every day actually work, and that curiosity turned into learning to code.",
-  "Right now I'm mainly working with websites, and I'm especially drawn to full-stack development. Most of what I know so far has come from developing course projects.",
-  "Outside of coding, I play games. I'm currently learning emerging technologies."
+  "I got curious about how the websites and apps I use every day actually work, and that curiosity turned into learning to code. I enjoy taking ideas and writing clean code to turn them into functioning applications.",
+  "Right now, I am focusing deeply on full-stack development. Most of my work involves building robust layouts, structuring databases, and managing simple APIs to connect everything together seamlessly."
+];
+
+const quickFacts = [
+  {
+    icon: '<path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/>', 
+    label: "Education", 
+    value: "Senior BSCS @ UP Tacloban" 
+  },
+  {
+    icon: '<path d="M20 10c0 4.993-5.539 10.193-7.399 11.74a1 1 0 0 1-1.202 0C9.54 20.193 4 14.993 4 10a8 8 0 1 1 16 0"/><circle cx="12" cy="10" r="3"/>', 
+    label: "Location", 
+    value: "Tacloban, Philippines" 
+  },
+  {
+    icon: '<path d="M12 8V4H8"/><rect x="5" y="8" width="14" height="10" rx="2"/><path d="M9 12h.01M15 12h.01M8 18h8"/>', 
+    label: "Currently Learning", 
+    value: "Web Frameworks" 
+  },
+  {
+    icon: '<rect x="2" y="6" width="20" height="12" rx="3"/><path d="M6 12h4M8 10v4M15 11h.01M18 13h.01"', 
+    label: "Currently Playing", 
+    value: "Geometry Dash / MLBB" 
+  }
 ];
 ---
 
@@ -12,9 +34,35 @@ const paragraphs = [
   <div class="title">
     <h2>{heading}</h2>
   </div>
-
-  <div class="about-body">
-    {paragraphs.map((p) => <p>{p}</p>)}
+  
+  <div class="right-col">
+    <div class="about-body">
+      {paragraphs.map((p) => <p>{p}</p>)}
+    </div>
+    
+    <div class="quick-facts-grid">
+      {quickFacts.map((fact) => (
+        <div class="fact-card">
+          <span class="fact-icon-wrapper">
+            <svg 
+              xmlns="http://www.w3.org/2000/svg" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="currentColor" 
+              stroke-width="2" 
+              stroke-linecap="round" 
+              stroke-linejoin="round"
+              class="fact-icon"
+              set:html={fact.icon}
+            />
+          </span>
+          <div class="fact-info">
+            <span class="fact-label">{fact.label}</span>
+            <span class="fact-value">{fact.value}</span>
+          </div>
+        </div>
+      ))}
+    </div>
   </div>
 </section>
 
@@ -43,31 +91,110 @@ const paragraphs = [
     border-bottom: 3px solid white;
     padding-bottom: 12px;
     display: inline-block;
+    width: fit-content;
+  }
+
+  .right-col {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
   }
 
   .about-body {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    text-align: justify;
+    max-width: 65ch;
   }
 
   .about-body p {
     font-size: 1.05rem;
-    line-height: 1.75;
+    line-height: 1.8;
     color: #cbd5e1;
     margin: 0;
   }
+  
+  .quick-facts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    max-width: 65ch;
+  }
+
+  .fact-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background-color: #0d1527;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 16px;
+    border-radius: 12px;
+    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .fact-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    background-color: rgba(59, 130, 246, 0.05);
+    border-radius: 10px;
+    border: 1px solid rgba(59, 130, 246, 0.1);
+    color: #3b82f6;
+    transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
+  }
+
+  .fact-icon {
+    width: 22px;
+    height: 22px;
+  }
+  
+  .fact-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(59, 130, 246, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  }
+
+  .fact-card:hover .fact-icon-wrapper {
+    background-color: #3b82f6;
+    color: #080c16;
+    transform: scale(1.05);
+  }
+
+  .fact-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .fact-label {
+    font-size: 0.725rem;
+    color: #64748b;
+    text-transform: uppercase;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+  }
+
+  .fact-value {
+    font-size: 0.9rem;
+    color: #f1f5f9;
+    font-weight: 500;
+    margin-top: 2px;
+  }
 
   @media (max-width: 900px) {
-    .about-me {
+    .about-container {
       grid-template-columns: 1fr;
       gap: 32px;
     }
 
-    .title {
+    .sticky-wrapper {
       position: relative;
       top: 0;
+    }
+
+    .right-col {
+      gap: 32px;
     }
   }
 </style>
