@@ -4,7 +4,7 @@ import profilePhoto from "../assets/profile.jpg";
 
 const name = "Jhun Kenneth Iniego";
 const role = "Software Developer";
-const tagline = "I build clean, engaging interfaces!";
+const introduction = "I'm a senior Computer Science student at the UP Tacloban with a passion for building clean, robust, and engaging web applications from database to user interface.";
 
 const socials = [
   {
@@ -32,7 +32,7 @@ const socials = [
       <span>{name}</span>
     </h1>
 
-    <p class="tagline">{tagline}</p>
+    <p class="introduction">{introduction}</p>
 
     <a href="#projects" class="cta">
       See my work
@@ -136,7 +136,7 @@ const socials = [
   }
 
   h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-size: clamp(2.5rem, 5vw, 3.8rem);
     font-weight: 800;
     line-height: 1.1;
     color: #f8fafc;
@@ -160,13 +160,14 @@ const socials = [
     filter: drop-shadow(0px 4px 12px rgba(95, 196, 255, 0.75));
   }
 
-  .tagline {
+  .introduction {
     font-size: 1.1rem;
     color: #cbd5e1;
-    line-height: 1.65;
-    max-width: 440px;
+    line-height: 1.7;
+    max-width: 480px;
     margin-bottom: 36px;
-    background: linear-gradient(180deg, #f8fafc 0%, #94a3b8 100%);
+    /* Soft gradient overlay for modern web aesthetics */
+    background: linear-gradient(180deg, #f8fafc 0%, #cbd5e1 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
