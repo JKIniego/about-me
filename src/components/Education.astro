@@ -29,7 +29,11 @@ const entries = [
     {entries.map(entry => (
       <div class="entry">
         <div class="entry-marker">
-          <span class="dot"></span>
+          <span class="dot">
+            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor" viewBox="0 0 16 16">
+              <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917z"/>
+            </svg>
+          </span>
         </div>
         <div class="entry-content">
           <span class="entry-period">{entry.period}</span>
@@ -47,6 +51,7 @@ const entries = [
     display: grid;
     grid-template-columns: 260px 1fr;
     gap: 64px;
+    background: #0b0f19;
   }
 
   .title {
@@ -79,14 +84,14 @@ const entries = [
     bottom: 8px;
     left: 9px;
     width: 2px;
-    background: linear-gradient(to bottom, #468ee5, #1e293b 80%);
+    background: linear-gradient(to bottom, #3b82f6, #1e293b 90%);
   }
 
   .entry {
     position: relative;
     display: flex;
     gap: 28px;
-    padding-bottom: 40px;
+    padding-bottom: 32px;
   }
 
   .entry:last-child {
@@ -102,28 +107,72 @@ const entries = [
 
   .dot {
     position: absolute;
-    top: 6px;
-    width: 10px;
-    height: 10px;
+    top: 18px;
+    width: 14px;
+    height: 14px;
     border-radius: 50%;
-    background: #334155;
-    box-shadow: 0 0 0 4px #0b0f19;
+    background: #0b0f19;
+    border: 2px solid #1e293b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #3b82f6;
     z-index: 1;
-    transition: all 0.3s ease;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dot svg {
+    opacity: 0;
+    transform: scale(0.3);
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .entry:hover .dot {
+    background: #3b82f6;
+    border-color: #3b82f6;
+    color: #f8fafc;
+    box-shadow: 0 0 0 4px #0b0f19, 0 0 12px rgba(59, 130, 246, 0.6);
+    transform: scale(1.15);
+  }
+
+  .entry:hover .dot svg {
+    opacity: 1;
+    transform: scale(1);
   }
 
   .entry-content {
     flex: 1;
     min-width: 0;
+    background: rgba(30, 41, 59, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 20px 24px;
+    border-radius: 12px;
+    backdrop-filter: blur(8px);
+    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+  }
+
+  .entry:hover .entry-content {
+    transform: translateX(4px);
+    border-color: rgba(59, 130, 246, 0.25);
+    background: rgba(30, 41, 59, 0.5);
   }
 
   .entry-period {
-    display: block;
-    font-size: 0.8rem;
+    display: inline-block;
+    font-size: 0.75rem;
     font-weight: 700;
-    color: #94a3b8;
+    color: #3b82f6;
+    background: rgba(59, 130, 246, 0.1);
+    padding: 3px 8px;
+    border-radius: 20px;
     letter-spacing: 0.05em;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
+    transition: background 0.25s ease, color 0.25s ease;
+  }
+
+  .entry:hover .entry-period {
+    background: #3b82f6;
+    color: #f8fafc;
   }
 
   .entry-content h3 {
@@ -136,17 +185,34 @@ const entries = [
   .institution {
     font-size: 0.95rem;
     font-weight: 500;
-    color: #cbd5e1;
+    color: #94a3b8;
     margin: 0;
+    transition: color 0.25s ease;
+  }
+
+  .entry:hover .institution {
+    color: #cbd5e1;
   }
   
   .entry:first-child .dot {
+    border-color: #10b981;
+    color: #10b981;
+  }
+
+  .entry:first-child:hover .dot {
     background: #10b981;
-    box-shadow: 0 0 0 5px #0b0f19, 0 0 0 10px rgba(16, 185, 129, 0.15);
+    border-color: #10b981;
+    box-shadow: 0 0 0 4px #0b0f19, 0 0 12px rgba(16, 185, 129, 0.6);
   }
 
   .entry:first-child .entry-period {
     color: #10b981;
+    background: rgba(16, 185, 129, 0.1);
+  }
+
+  .entry:first-child:hover .entry-period {
+    background: #10b981;
+    color: #f8fafc;
   }
 
   @media (max-width: 900px) {
@@ -165,6 +231,10 @@ const entries = [
   @media (max-width: 720px) {
     .education {
       padding: clamp(28px, 6vw, 70px) 24px;
+    }
+    
+    .entry-content {
+      padding: 16px 20px;
     }
   }
 </style>
