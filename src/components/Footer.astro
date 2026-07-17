@@ -45,7 +45,7 @@ const socials = [
   .footer {
     border-top: 1px solid transparent;
     border-image: linear-gradient(90deg, transparent 5%, #1e293b 35%, #1e293b 65%, transparent 95%) 1;
-    padding: 40px 24px;
+    padding: clamp(40px, 10vw, 80px) clamp(60px, 15vw, 220px);
     background-color: #080c16;
   }
 
@@ -111,7 +111,17 @@ const socials = [
     margin: 0 1px;
   }
 
+  @media (max-width: 900px) {
+    .footer {
+      padding: clamp(32px, 8vw, 80px) 40px;
+    }
+  }
+
   @media (max-width: 720px) {
+    .footer {
+      padding: clamp(28px, 6vw, 70px) 24px;
+    }
+
     .footer-container {
       flex-direction: column-reverse;
       gap: 16px;

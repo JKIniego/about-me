@@ -165,6 +165,7 @@ const categories = [
 
   @media (max-width: 900px) {
     .tech-stack {
+      padding: clamp(32px, 8vw, 80px) 40px;
       grid-template-columns: 1fr;
       gap: 32px;
     }
@@ -177,6 +178,12 @@ const categories = [
     .group {
       grid-template-columns: 1fr;
       gap: 12px;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .tech-stack {
+      padding: clamp(28px, 6vw, 70px) 24px;
     }
   }
 </style>

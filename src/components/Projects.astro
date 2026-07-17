@@ -214,6 +214,7 @@ const projects = [
 
   @media (max-width: 900px) {
     .projects {
+      padding: clamp(32px, 8vw, 80px) 40px;
       grid-template-columns: 1fr;
       gap: 32px;
     }
@@ -221,6 +222,12 @@ const projects = [
     .title {
       position: relative;
       top: 0;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .projects {
+      padding: clamp(28px, 6vw, 70px) 24px;
     }
   }
 </style>

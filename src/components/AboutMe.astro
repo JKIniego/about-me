@@ -71,8 +71,10 @@ const quickFacts = [
     padding: clamp(40px, 10vw, 135px) clamp(60px, 15vw, 220px);
     background-color: #080c16;
     display: grid;
-    grid-template-columns: 260px 1fr;
+    grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
     gap: 64px;
+    box-sizing: border-box;
+    min-width: 0;
   }
 
   .title {
@@ -183,18 +185,25 @@ const quickFacts = [
   }
 
   @media (max-width: 900px) {
-    .about-container {
+    .about-me {
+      padding: clamp(32px, 8vw, 80px) 40px;
       grid-template-columns: 1fr;
       gap: 32px;
     }
 
-    .sticky-wrapper {
+    .title {
       position: relative;
       top: 0;
     }
 
     .right-col {
       gap: 32px;
+    }
+  }
+
+  @media (max-width: 720px) {
+    .about-me {
+      padding: clamp(28px, 6vw, 70px) 24px;
     }
   }
 </style>
