@@ -43,96 +43,116 @@ const categories = [
 ---
 
 <section id="tech-stack" class="tech-stack">
-  <div class="title">
-    <h2>{heading}</h2>
-  </div>
+  <div class="tech-stack-wrapper">
+    <div class="title-container">
+      <h2>{heading}</h2>
+    </div>
 
-  <div class="stack-groups">
-    {categories.map((category) => (
-      <div class="group">
-        <span class="group-label">{category.label}</span>
-        <div class="grid-container">
-          {category.items.map((item) => (
-            <div class="tech-card">
-              <div class="icon-wrapper">
-                {item === "Quasar" ? (
-                  <Image src={quasarIcon} alt="Quasar" width={20} height={20} />
-                ) : iconMap[item] ? (
-                  <img
-                    src={`https://skillicons.dev/icons?i=${iconMap[item]}`}
-                    alt={item}
-                    loading="lazy"
-                    width="20"
-                    height="20"
-                  />
-                ) : (
-                  <svg class="fallback-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M9 6 3 12l6 6" /><path d="M15 6l6 6-6 6" />
-                  </svg>
-                )}
+    <div class="stack-groups">
+      {categories.map((category) => (
+        <div class="group">
+          <span class="group-label">{category.label}</span>
+          <div class="grid-container">
+            {category.items.map((item) => (
+              <div class="tech-card">
+                <div class="icon-wrapper">
+                  {item === "Quasar" ? (
+                    <Image src={quasarIcon} alt="Quasar" width={20} height={20} />
+                  ) : iconMap[item] ? (
+                    <img
+                      src={`https://skillicons.dev/icons?i=${iconMap[item]}`}
+                      alt={item}
+                      loading="lazy"
+                      width="20"
+                      height="20"
+                    />
+                  ) : (
+                    <svg class="fallback-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M9 6 3 12l6 6" /><path d="M15 6l6 6-6 6" />
+                    </svg>
+                  )}
+                </div>
+                <span class="tech-name">{item}</span>
               </div>
-              <span class="tech-name">{item}</span>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
 </section>
 
 <style>
   .tech-stack {
-    padding: clamp(40px, 10vw, 135px) clamp(60px, 15vw, 220px);
+    padding: clamp(40px, 8vw, 120px) clamp(24px, 10vw, 180px);
     background-color: #080c16;
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 64px;
+    box-sizing: border-box;
+    width: 100%;
   }
 
-  .title {
-    position: sticky;
-    top: 120px;
-    height: fit-content;
+  .tech-stack-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    width: 100%;
+  }
+
+  .title-container {
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 16px;
   }
 
   h2 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.6rem, 4vw, 2.25rem);
     font-weight: 800;
     color: #f8fafc;
     margin: 0;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border-bottom: 3px solid white;
-    padding-bottom: 12px;
+    letter-spacing: 0.08em;
+    position: relative;
     display: inline-block;
+  }
+
+  h2::after {
+    content: "";
+    position: absolute;
+    bottom: -17px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, #3b82f6, #10b981, transparent);
+    border-radius: 2px;
   }
 
   .stack-groups {
     display: flex;
     flex-direction: column;
-    gap: 48px;
+    gap: 40px;
   }
 
   .group {
     display: grid;
-    grid-template-columns: 140px 1fr;
+    grid-template-columns: 160px 1fr;
     gap: 24px;
     align-items: flex-start;
   }
 
   .group-label {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
     color: white;
-    padding-top: 12px;
+    padding-top: 4px;
   }
   
   .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-    gap: 12px;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 16px;
   }
   
   .tech-card {
@@ -187,41 +207,23 @@ const categories = [
     color: #64748b;
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 600px) {
     .tech-stack {
-      padding: clamp(32px, 8vw, 80px) 40px;
-      grid-template-columns: 1fr;
-      gap: 32px;
+      padding: 40px 16px;
     }
 
-    .title {
-      position: relative;
-      top: 0;
+    .tech-stack-wrapper {
+      gap: 36px;
     }
 
     .group {
       grid-template-columns: 1fr;
-      gap: 16px;
-    }
-
-    .group-label {
-      padding-top: 0;
-    }
-  }
-
-  @media (max-width: 720px) {
-    .tech-stack {
-      padding: clamp(28px, 6vw, 70px) 24px;
+      gap: 12px;
     }
 
     .grid-container {
-      grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-      gap: 8px;
-    }
-
-    .tech-card {
-      padding: 12px;
-      gap: 8px;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 12px;
     }
   }
 </style>

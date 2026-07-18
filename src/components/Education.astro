@@ -21,60 +21,80 @@ const entries = [
 ---
 
 <section id="education" class="education">
-  <div class="title">
-    <h2>{heading}</h2>
-  </div>
+  <div class="education-wrapper">
+    <div class="title-container">
+      <h2>{heading}</h2>
+    </div>
 
-  <div class="timeline">
-    {entries.map(entry => (
-      <div class="entry">
-        <div class="entry-marker">
-          <span class="dot">
-            <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor" viewBox="0 0 16 16">
-              <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917z"/>
-            </svg>
-          </span>
+    <div class="timeline">
+      {entries.map(entry => (
+        <div class="entry">
+          <div class="entry-marker">
+            <span class="dot">
+              <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8.211 2.047a.5.5 0 0 0-.422 0l-7.5 3.5a.5.5 0 0 0 .025.917l7.5 3a.5.5 0 0 0 .372 0L14 7.14V13a1 1 0 0 0-1 1v2h3v-2a1 1 0 0 0-1-1V6.739l.686-.275a.5.5 0 0 0 .025-.917z"/>
+              </svg>
+            </span>
+          </div>
+          <div class="entry-content">
+            <span class="entry-period">{entry.period}</span>
+            <h3>{entry.degree}</h3>
+            <p class="institution">{entry.institution}</p>
+          </div>
         </div>
-        <div class="entry-content">
-          <span class="entry-period">{entry.period}</span>
-          <h3>{entry.degree}</h3>
-          <p class="institution">{entry.institution}</p>
-        </div>
-      </div>
-    ))}
+      ))}
+    </div>
   </div>
 </section>
 
 <style>
   .education {
-    padding: clamp(40px, 10vw, 135px) clamp(60px, 15vw, 220px);
-    display: grid;
-    grid-template-columns: 260px 1fr;
-    gap: 64px;
+    padding: clamp(40px, 8vw, 120px) clamp(24px, 10vw, 180px);
     background: #0b0f19;
+    box-sizing: border-box;
+    width: 100%;
   }
 
-  .title {
-    position: sticky;
-    top: 120px;
-    height: fit-content;
+  .education-wrapper {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    width: 100%;
+  }
+
+  .title-container {
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding-bottom: 16px;
   }
 
   h2 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: clamp(1.6rem, 4vw, 2.25rem);
     font-weight: 800;
     color: #f8fafc;
     margin: 0;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    border-bottom: 3px solid white;
-    padding-bottom: 12px;
+    letter-spacing: 0.08em;
+    position: relative;
     display: inline-block;
+  }
+
+  h2::after {
+    content: "";
+    position: absolute;
+    bottom: -17px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: linear-gradient(to right, #3b82f6, #10b981, transparent);
+    border-radius: 2px;
   }
 
   .timeline {
     position: relative;
-    max-width: 680px;
+    width: 100%;
   }
 
   .timeline::before {
@@ -84,14 +104,14 @@ const entries = [
     bottom: 8px;
     left: 9px;
     width: 2px;
-    background: linear-gradient(to bottom, #3b82f6, #1e293b 90%);
+    background: linear-gradient(to bottom, #10b981, #3b82f6 40%, #1e293b 95%);
   }
 
   .entry {
     position: relative;
     display: flex;
     gap: 28px;
-    padding-bottom: 32px;
+    padding-bottom: 40px;
   }
 
   .entry:last-child {
@@ -131,7 +151,7 @@ const entries = [
     background: #3b82f6;
     border-color: #3b82f6;
     color: #f8fafc;
-    box-shadow: 0 0 0 4px #0b0f19, 0 0 12px rgba(59, 130, 246, 0.6);
+    box-shadow: 0 0 0 4px #0b0f19, 0 0 16px rgba(59, 130, 246, 0.5);
     transform: scale(1.15);
   }
 
@@ -143,18 +163,20 @@ const entries = [
   .entry-content {
     flex: 1;
     min-width: 0;
-    background: linear-gradient(135deg, #0f172a 0%, #0d131f 100%);
-    border: 1px solid #1e293b;
-    padding: 20px 24px;
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.6) 0%, rgba(13, 19, 31, 0.6) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    padding: 24px 28px;
     border-radius: 12px;
     backdrop-filter: blur(8px);
-    transition: transform 0.25s ease, border-color 0.25s ease, background 0.25s ease;
+    transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), 
+                border-color 0.25s ease, 
+                box-shadow 0.25s ease;
   }
 
   .entry:hover .entry-content {
-    transform: translateY(-4px);
-    border-color: rgba(255, 255, 255, 0.3);
-    box-shadow: 0 12px 24px -4px rgba(59, 130, 246, 0.15);
+    transform: translateX(4px);
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.2);
   }
 
   .entry-period {
@@ -162,24 +184,27 @@ const entries = [
     font-size: 0.75rem;
     font-weight: 700;
     color: #3b82f6;
-    background: rgba(59, 130, 246, 0.1);
-    padding: 3px 8px;
+    background: rgba(59, 130, 246, 0.08);
+    padding: 4px 10px;
     border-radius: 20px;
+    border: 1px solid rgba(59, 130, 246, 0.1);
     letter-spacing: 0.05em;
-    margin-bottom: 10px;
-    transition: background 0.25s ease, color 0.25s ease;
+    margin-bottom: 12px;
+    transition: all 0.25s ease;
   }
 
   .entry:hover .entry-period {
     background: #3b82f6;
+    border-color: #3b82f6;
     color: #f8fafc;
   }
 
   .entry-content h3 {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-weight: 700;
     color: #f8fafc;
-    margin: 0 0 4px;
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
   }
 
   .institution {
@@ -202,39 +227,51 @@ const entries = [
   .entry:first-child:hover .dot {
     background: #10b981;
     border-color: #10b981;
-    box-shadow: 0 0 0 4px #0b0f19, 0 0 12px rgba(16, 185, 129, 0.6);
+    box-shadow: 0 0 0 4px #0b0f19, 0 0 16px rgba(16, 185, 129, 0.5);
   }
 
   .entry:first-child .entry-period {
     color: #10b981;
-    background: rgba(16, 185, 129, 0.1);
+    background: rgba(16, 185, 129, 0.08);
+    border-color: rgba(16, 185, 129, 0.1);
   }
 
   .entry:first-child:hover .entry-period {
     background: #10b981;
+    border-color: #10b981;
     color: #f8fafc;
   }
 
-  @media (max-width: 900px) {
-    .education {
-      padding: clamp(32px, 8vw, 80px) 40px;
-      grid-template-columns: 1fr;
-      gap: 32px;
-    }
-
-    .title {
-      position: relative;
-      top: 0;
-    }
+  .entry:first-child:hover .entry-content {
+    border-color: rgba(16, 185, 129, 0.3);
+    box-shadow: 0 10px 30px -10px rgba(16, 185, 129, 0.15);
   }
 
-  @media (max-width: 720px) {
+  @media (max-width: 600px) {
     .education {
-      padding: clamp(28px, 6vw, 70px) 24px;
+      padding: 40px 16px;
+    }
+
+    .education-wrapper {
+      gap: 36px;
+    }
+
+    .entry {
+      gap: 16px;
+    }
+
+    .entry-content {
+      padding: 18px 20px;
+    }
+
+    .timeline::before {
+      left: 7px;
     }
     
-    .entry-content {
-      padding: 16px 20px;
+    .dot {
+      width: 12px;
+      height: 12px;
+      left: 2px;
     }
   }
 </style>
